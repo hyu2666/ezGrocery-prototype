@@ -15,8 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/convertBtn"
-        app:layout_constraintVertical_bias="0.23" />
+        app:layout_constraintTop_toBottomOf="@+id/get"
+        app:layout_constraintVertical_bias="0.039" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInput"
@@ -33,5 +33,34 @@
         android:text="Convert"
         app:layout_constraintTop_toBottomOf="@+id/textInput"
         tools:layout_editor_absoluteX="160dp" />
+
+    <Button
+        android:id="@+id/insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insert"
+        app:layout_constraintTop_toBottomOf="@+id/convertBtn"
+        tools:layout_editor_absoluteX="161dp" />
+
+    <Button
+        android:id="@+id/get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get"
+        app:layout_constraintTop_toBottomOf="@+id/insert"
+        tools:layout_editor_absoluteX="161dp" />
+
+    <TextView
+        android:id="@+id/dbText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restultTxt"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
