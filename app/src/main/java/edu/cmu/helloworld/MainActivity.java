@@ -119,25 +119,40 @@ public class MainActivity extends AppCompatActivity {
         final MongoClient mobileClient =
                 client.getServiceClient(LocalMongoDbService.clientFactory);
 
-
-
-
         //get the button
         Button btn = findViewById(R.id.convertBtn);
         Button insertBtn = findViewById(R.id.insert);
         Button getBtn = findViewById(R.id.get);
         final TextView dbText = findViewById(R.id.dbText);
         final TextView textView = findViewById(R.id.restultTxt);
-        final TextInputEditText input = findViewById(R.id.textInput);
+        final TextInputEditText amountInput = findViewById(R.id.textInput);
+        final TextInputEditText typeInput = findViewById(R.id.convertTo);
+
+        final String[] currencyStr = new String[1];
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                HttpUtil httpUtil = new HttpUtil();
+                currencyStr[0] = httpUtil.httpGet("https://api.exchangeratesapi.io/latest?base=USD");
+            }
+        }).start();
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "This is a test", Toast.LENGTH_SHORT)
                 .show();
-                Editable inputNumber = input.getText();
+                Editable inputNumber = amountInput.getText();
                 String str_num = inputNumber.toString();
-                int num = Integer.parseInt(str_num) * 7;
+                Editable convertToStr = typeInput.getText();
+
+                int start = currencyStr[0].indexOf(convertToStr.toString());
+                System.out.println(start);
+                String rate = currencyStr[0].substring(start + 5, start + 9);
+                System.out.println(rate);
+                dbText.setText(rate);
+
+                double num = Integer.parseInt(str_num) * Double.parseDouble(rate);
                 String out = String.valueOf(num);
                 textView.setText(out);
             }
@@ -188,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                     sb.append(document.get("name"));
                 }
                 dbText.setText(sb.toString());
+
             }
         });
 
